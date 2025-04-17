@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Bulletin scolaire - École de Digambal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f2f5;
+    }
+
+    header {
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .info-eleve {
+      background-color: #e0f7fa;
+      padding: 20px;
+      margin: 20px;
+      border-radius: 10px;
+    }
+
+    .info-eleve input {
+      margin-bottom: 10px;
+      width: 100%;
+      padding: 5px;
+    }
+
+    table {
+      width: 90%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background-color: #fff8e1;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #ffeb3b;
+    }
+
+    .moyennes {
+      background-color: #dcedc8;
+      padding: 20px;
+      margin: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    button {
+      display: block;
+      margin: 0 auto 20px;
+      padding: 10px 20px;
+      background-color: #2196F3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0b7dda;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>École Primaire de Digambal</h1>
+  <h2>Bulletin Scolaire - Année 2024/2025</h2>
+</header>
+
+<section class="info-eleve">
+  <label>Nom de l'élève : <input type="text" id="nom"></label><br>
+  <label>Classe : <input type="text" id="classe"></label><br>
+  <label>Nombre total d'élèves : <input type="number" id="total-eleves"></label><br>
+  <label>Jours de présence : <input type="number" id="presence"></label><br>
+  <label>Jours d'absence : <input type="number" id="absence"></label><br>
+  <label>Trimestre : <input type="text" id="trimestre"></label>
+</section>
+
+<table id="bulletin">
+  <thead>
+    <tr>
+      <th>Matière</th>
+      <th>Note (/20)</th>
+      <th>Commentaire</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Maths</td><td><input type="number" class="note"></td><td><input type="text"></td></tr>
+    <tr><td>Sciences</td><td><input type="number" class="note"></td><td><input type="text"></td></tr>
+    <tr><td>Histoire</td><td><input type="number" class="note"></td><td><input type="text"></td></tr>
+    <tr><td>Français</td><td><input type="number" class="note"></td><td><input type="text"></td></tr>
+    <tr><td>Sciences Sociales</td><td><input type="number" class="note"></td><td><input type="text"></td></tr>
+    <tr><td>Art</td><td><input type="number" class="note"></td><td><input type="text"></td></tr>
+    <tr><td>Musique</td><td><input type="number" class="note"></td><td><input type="text"></td></tr>
+  </tbody>
+</table>
+
+<button onclick="calculerMoyenne()">Calculer les moyennes</button>
+
+<section class="moyennes">
+  <p><strong>Moyenne Trimestrielle :</strong> <span id="moy-trimestre">-</span>/20</p>
+  <p><strong>Moyenne Générale :</strong> <span id="moy-generale">-</span>/20</p>
+</section>
+
+<script>
+  function calculerMoyenne() {
+    const notes = document.querySelectorAll(".note");
+    let total = 0;
+    let count = 0;
+
+    notes.forEach(note => {
+      const val = parseFloat(note.value);
+      if (!isNaN(val)) {
+        total += val;
+        count++;
+      }
+    });
+
+    const moyenne = (count > 0) ? (total / count).toFixed(2) : 0;
+    document.getElementById("moy-trimestre").innerText = moyenne;
+    document.getElementById("moy-generale").innerText = moyenne; // identique ici pour simplification
+  }
+</script>
+
+</body>
+</html>
